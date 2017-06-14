@@ -1,0 +1,21 @@
+{
+  "name": "github-explorer",
+  "version": "0.1.0",
+  "description": "Retrieve github repositories by querying its public api",
+  "main": "js/repos.js",
+  "scripts": {
+    "test": "karma start karma.conf.js"
+  },
+  "author": "Crystal Finch",
+  "devDependencies": {
+    "angular-mocks": "^1.6.4",
+    "jasmine-core": "^2.6.2",
+    "karma": "^1.7.0",
+    "karma-chrome-launcher": "^2.1.1",
+    "karma-jasmine": "^1.1.0"
+  },
+  "dependencies": {
+    "angular": "^1.6.4",
+    "semantic-ui-css": "^2.2.10"
+  }
+}
