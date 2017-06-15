@@ -12,21 +12,51 @@
 <body>
 
   <div ng-app="githubExplorer" class="ui container">
-    <div class="ui two column centered grid">
-      <div class="column center aligned">
+    <div class="ui two column centered stackable grid" ng-controller="ReposCtrl" ng-init="getRepos()">
 
-        <div ng-controller="ReposCtrl" ng-init="getRepos()" class="ui basic segment">
-          <div class="ui icon input">
-            <input class="prompt" type="text" ng-model="username" ng-change="getRepos()" ng-model-options="{ debounce: 750 }">
-            <i class="search icon"></i>
+      <div class="row">
+        <div class="five wide column">
+          <div class="ui basic center aligned segment">
+            <i class="huge github icon"></i>
+            <h3 class="ui header">
+              Github Explorer
+              <div class="sub header">Enter a Username</div>
+            </h3>
+            <div class="ui icon input">
+              <input class="prompt" type="text" ng-model="username" ng-change="getRepos()" ng-model-options="{ debounce: 750 }">
+              <i class="search icon"></i>
+            </div>
           </div>
-          <div class="ui hidden divider"></div>
-          <repo-list>
-            <repo-item ng-repeat="repo in repos | orderBy:'-created_at'"></repo-item>
-          </repo-list>
         </div>
-
       </div>
+
+      <div class="row">
+        <div class="ten wide column">
+
+            <repo-list>
+              <table class="ui single line table">
+                <thead>
+                  <tr>
+                    <th class="eight wide">Repo Name</th>
+                    <th class="four wide">Updated</th>
+                    <th class="two wide">Forks</th>
+                    <th class="two wide">Stars</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="item" ng-repeat="repo in repos | orderBy:'-created_at'">
+                    <td class="eight wide"><a href="{{repo.html_url}}" target="_blank">{{repo.name}}</a></td>
+                    <td class="four wide">{{repo.updated_at | date:"MMM d, yyyy"}}</td>
+                    <td class="two wide"><i class="fork icon"></i>{{repo.forks}}</td>
+                    <td class="two wide"><i class="small star icon"></i>{{repo.stargazers_count}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </repo-list>
+
+        </div>
+      </div>
+
     </div>
   </div>
 

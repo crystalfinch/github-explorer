@@ -11,7 +11,7 @@
         });
       };
     }])
-    .value('username', 'crystalfinch') // initial value
+    .value('username', 'airbnb') // initial value
     .factory('githubUrl', [function() {
       return {
         makeUrl: function(username) {
@@ -41,26 +41,7 @@
         restrict: 'E',
         scope: false,
         transclude: true,
-        template: '<div> \
-            <h3>Found Repositories</h3> \
-            <div ng-transclude></div> \
-          </div>'
-      }
-    })
-    .directive('repoItem', function() {
-      return {
-        restrict: 'E',
-        require: '^repoList',
-        template: '<div> \
-          <h2> \
-            <a href="{{repo.html_url}}" target="_blank"> \
-              {{repo.name}} \
-            </a> \
-          </h2> \
-          <p>Updated {{repo.updated_at | date:"short"}}<br> \
-            Created {{repo.created_at | date:"short"}}</p> \
-          <div class="ui divider"></div> \
-        </div>'
+        template: '<div ng-transclude></div>'
       }
     });
 })();

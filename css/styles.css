@@ -1,1 +1,10 @@
 @import url('../node_modules/semantic-ui-css/semantic.min.css');
+
+.ui.container {
+	padding-top: 2em;
+	padding-bottom: 8em;
+}
+
+.ui.header {
+	margin-top: .5em;
+}
