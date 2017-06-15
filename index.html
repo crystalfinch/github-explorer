@@ -17,7 +17,7 @@
 
         <div ng-controller="ReposCtrl" ng-init="getRepos()" class="ui basic segment">
           <div class="ui icon input">
-            <input class="prompt" type="text" ng-model="username" ng-change="update()" ng-model-options="{ debounce: 750 }">
+            <input class="prompt" type="text" ng-model="username" ng-change="getRepos()" ng-model-options="{ debounce: 750 }">
             <i class="search icon"></i>
           </div>
           <div class="ui hidden divider"></div>

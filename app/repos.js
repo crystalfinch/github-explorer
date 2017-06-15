@@ -3,39 +3,27 @@
   var app = angular.module('githubExplorer', []);
 
   angular.module('githubExplorer')
-    .controller('ReposCtrl', ['$scope', 'Repos', function($scope, Repos) {
-      $scope.username = Repos.getUsername();
+    .controller('ReposCtrl', ['$scope', 'username', 'repositories', function($scope, username, repositories) {
+      $scope.username = username;
       $scope.getRepos = function() {
-          Repos.all().then(function(data) {
-              $scope.repos = data;
-              console.log($scope.repos);
-          });
-      };
-      $scope.update = function() {
-        Repos.setUsername($scope.username);
-        $scope.getRepos();
+        repositories.all($scope.username).then(function(data) {
+          $scope.repos = data;
+        });
       };
     }])
-    .factory('Repos', function($http) {
-      var _baseUrl = 'https://api.github.com/users/',
-          _username = 'crystalfinch',
-          _requestUrl = '',
-          _data = [];
-
-      var _makeUrl = function() {
-        _requestUrl = _baseUrl + _username + '/repos';
-        return _requestUrl;
-      }
-
+    .value('username', 'crystalfinch') // initial value
+    .factory('githubUrl', [function() {
       return {
-        setUsername: function(username) {
-          _username = username;
-        },
-        getUsername: function() {
-          return _username;
-        },
-        all: function() {
-          _makeUrl();
+        makeUrl: function(username) {
+          var url = 'https://api.github.com/users/' + username + '/repos';
+          return url;
+        }
+      };
+    }])
+    .factory('repositories', ['$http', 'githubUrl', function($http, githubUrl) {
+      return {
+        all: function(username) {
+          var _requestUrl = githubUrl.makeUrl(username);
           var promise = $http({
                 method: 'GET',
                 url: _requestUrl
@@ -47,7 +35,7 @@
           return promise;
         }
       }
-    })
+    }])
     .directive('repoList', function() {
       return {
         restrict: 'E',
