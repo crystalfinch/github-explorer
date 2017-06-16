@@ -31,24 +31,60 @@
       </div>
 
       <div class="row">
-        <div class="ten wide column">
+        <div class="fifteen wide tablet ten wide computer column">
 
             <repo-list>
               <table class="ui single line table">
                 <thead>
                   <tr>
-                    <th class="eight wide">Repo Name</th>
-                    <th class="four wide">Updated</th>
-                    <th class="two wide">Forks</th>
-                    <th class="two wide">Stars</th>
+                    <th class="seven wide tablet eight wide computer">
+                      Repo Name
+                      <div class="ui icon buttons">
+                        <button class="ui mini button" ng-click="sortBy('name')">
+                          <i ng-show="propertyName !== 'name'" class="sort disabled icon"></i>
+                          <i ng-show="reverse === true && propertyName === 'name'" class="arrow up icon"></i>
+                          <i ng-show="reverse === false && propertyName === 'name'" class="arrow down icon"></i>
+                        </button>
+                      </div>
+                    </th>
+                    <th class="three wide tablet four wide computer">
+                      Updated
+                      <div class="ui icon buttons">
+                        <button class="ui mini button" ng-click="sortBy('updated_at')">
+                          <i ng-show="propertyName !== 'updated_at'" class="sort disabled icon"></i>
+                          <i ng-show="reverse === true && propertyName === 'updated_at'" class="arrow up icon"></i>
+                          <i ng-show="reverse === false && propertyName === 'updated_at'" class="arrow down icon"></i>
+                        </button>
+                      </div>
+                    </th>
+                    <th class="three wide tablet two wide computer">
+                      Forks
+                      <div class="ui icon buttons">
+                        <button class="ui mini button" ng-click="sortBy('forks')">
+                          <i ng-show="propertyName !== 'forks'" class="sort disabled icon"></i>
+                          <i ng-show="reverse === true && propertyName === 'forks'" class="arrow up icon"></i>
+                          <i ng-show="reverse === false && propertyName === 'forks'" class="arrow down icon"></i>
+                        </button>
+                      </div>
+                    </th>
+                    <th class="three wide tablet two wide computer">
+                      Stars
+                      <div class="ui icon buttons">
+                        <button class="ui mini button" ng-click="sortBy('stargazers_count')">
+                          <i ng-show="propertyName !== 'stargazers_count'" class="sort disabled icon"></i>
+                          <i ng-show="reverse === true && propertyName === 'stargazers_count'" class="arrow up icon"></i>
+                          <i ng-show="reverse === false && propertyName === 'stargazers_count'" class="arrow down icon"></i>
+                        </button>
+                      </div>
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr class="item" ng-repeat="repo in repos | orderBy:'-created_at'">
-                    <td class="eight wide"><a href="{{repo.html_url}}" target="_blank">{{repo.name}}</a></td>
-                    <td class="four wide">{{repo.updated_at | date:"MMM d, yyyy"}}</td>
-                    <td class="two wide"><i class="fork icon"></i>{{repo.forks}}</td>
-                    <td class="two wide"><i class="small star icon"></i>{{repo.stargazers_count}}</td>
+                  <tr class="item" ng-repeat="repo in repos | orderBy:propertyName:reverse">
+                    <td><a href="{{repo.html_url}}" target="_blank">{{repo.name}}</a></td>
+                    <td>{{repo.updated_at | date:"MMM d, yyyy"}}</td>
+                    <td><i class="fork icon"></i>{{repo.forks}}</td>
+                    <td><i class="small star icon"></i>{{repo.stargazers_count}}</td>
                   </tr>
                 </tbody>
               </table>
