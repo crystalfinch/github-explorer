@@ -10,6 +10,9 @@
           $scope.repos = data;
         });
       };
+      $scope.$watch('username', function() {
+        $scope.getRepos();
+      });
       $scope.propertyName = 'name';
       $scope.reverse = false;
       $scope.sortBy = function(propertyName) {
